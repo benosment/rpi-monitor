@@ -3,8 +3,9 @@ import datetime
 import subprocess
 app = Flask(__name__)
 
+
 @app.route("/")
-def hello():
+def main():
     now = datetime.datetime.now()
     time_string = now.strftime("%m-%d-%Y %H:%M:%S")
     all_processes = subprocess.check_output("ps -ef".split()).splitlines()
@@ -12,12 +13,14 @@ def hello():
     uv_process = 'not found'
     for process in all_processes:
         if 'comic.py' in str(process):
-            print(process)
             pycomic_process = process.decode('utf-8')
     if 'uv-code.py' in str(process):
-            print(process)
             uv_process = process.decode('utf-8')
-    template_data = {'title': 'HELLO!',
+    hostname = subprocess.check_output('hostname').decode('utf-8')
+    title_string = 'Monitoring %s' % hostname
+    uptime = subprocess.check_output('uptime').decode('utf-8')
+    template_data = {'title': title_string,
+                     'uptime': uptime,
                      'time': time_string,
                      'pycomic_process': pycomic_process,
                      'uv_process': uv_process}
