@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pycomic Settings</title>
+</head>
+<body>
+    <h1>Pycomic Settings</h1>
+    <h2>Pycomic query terms</h2>
+    <ul>
+    {% for qt in query_terms %}
+        <li>{{ qt }} </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
